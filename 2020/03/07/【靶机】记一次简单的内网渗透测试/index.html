@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" type="image/png" href="/img/icon.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="author" content="13l00m">
+  <meta name="keywords" content="">
+  <title>【靶机】记一次简单的内网渗透测试 ~ 13l00m&#39;World</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+</head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>13l00m&#39;World</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/alone.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: scroll;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期六, 三月 7日 2020, 8:53 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    703 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      2 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h3 id="开始之前先说一下实验环境："><a href="#开始之前先说一下实验环境：" class="headerlink" title="开始之前先说一下实验环境："></a>开始之前先说一下实验环境：</h3><ul>
+<li>两台物理机（物理机里面存有虚拟机）</li>
+<li>win10 存在kali 虚拟机 ip都在192.168.1.* 网段</li>
+<li>2k3 存在2k3 虚拟机 物理机在192.168.1.* 网段 虚拟机在192.168.159.*网段（提供内网环境）</li>
+<li>两台物理机可互相ping通，kali虚拟机也可以ping通2k3物理机，2k3虚拟机只能由2k3物理机ping通（这么说可以理解吧）</li>
+<li>漏洞环境就简单处理了，主要是想记录一下如何利用2k3外网服务器做跳板间接连通内网服务器继续进行测试</li>
+<li>2k3物理机ip：192.168.1.2</li>
+<li>2k3虚拟机ip：192.168.159.139</li>
+<li>win10物理机ip：192.168.1.3</li>
+<li>kali虚拟机ip：192.168.1.123</li>
+</ul>
+<h2 id="开始实验："><a href="#开始实验：" class="headerlink" title="开始实验："></a>开始实验：</h2><hr>
+<p>访问 192.168.1.2<br><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C0.png" srcset="undefined" alt="file"><br>进行目录扫描：</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C1.png" srcset="undefined" alt="file"></p>
+<p>每个目录访问一遍</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C2.png" srcset="undefined" alt="file"></p>
+<p>这靶场大家应该都玩过了，上传个小马（就当上传漏洞了），目录里面还有一个phpmyadmin 这个一会儿进行作跳板的时候会用到。避免重复呢，我就直接上传个小马</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C3.png" srcset="undefined" alt="file"></p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C4.png" srcset="undefined" alt="file"></p>
+<p>利用msf生成木马（用msf回弹主要是需要添加路由）</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C5.png" srcset="undefined" alt="file"></p>
+<p>在msf模块监听设置好的端口</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C6.png" srcset="undefined" alt="file"></p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C7.png" srcset="undefined" alt="file"></p>
+<p>用之前传的小马+蚁剑虚拟终端打开上传的shell123.exe</p>
+<p>msf 可以检测到回传</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C8.png" srcset="undefined" alt="file"></p>
+<p>利用内置模块检测可以连通的内网网段<br><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C9.png" srcset="undefined" alt="file"></p>
+<p>已知内网机器是在192.168.159.0/24段的，我就不卖关子直接添加路由了（route add 也是可以的）</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C10.png" srcset="undefined" alt="file"></p>
+<p>查看添加路由情况</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C11.png" srcset="undefined" alt="file"></p>
+<p>接下来利用msf 进行内网网段中存活主机的扫描</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C12.png" srcset="undefined" alt="file"></p>
+<p>已知内网ip在139 我就缩小一下范围，节约时间<br><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C13.png" srcset="undefined" alt="file"></p>
+<p>成功检测到139开放80端口</p>
+<p>但这个时候直接访问是不可行的，接下来进行端口映射</p>
+<p>回到刚才的Session</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C14.png" srcset="undefined" alt="file"><br>利用 portfwd 进行端口映射<br>将内网中的80端口映射到kali机中的80端口<br>访问<a href="http://localhost" target="_blank" rel="noopener">http://localhost</a><br><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C15.png" srcset="undefined" alt="file"><br>访问成功<br>为了方便拿shell，这里就用phpmyadmin弱口令直接进去了</p>
+<p>根据phpinfo文件提供的绝对路径，修改sql的日志存储绝对路径就可以构造后门php文件</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C17.png" srcset="undefined" alt="file"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show variables like &apos;%general%&apos;; #查看配置</span><br><span class="line">set global general\_log = on; #开启general log 模式</span><br><span class="line">set global general_log_file = &apos;D:\phpstudy\PHPTutorial\WWW&apos;; #设置日志目录为shell地址</span><br><span class="line">select &quot;payload&quot; 写入shell</span><br></pre></td></tr></table></figure>
+
+<p>这里可能是我的配置问题，小马回传到msf的时候会收到但是直接断掉，所以直接上传了个大马</p>
+<p><img src="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%5C18.png" srcset="undefined" alt="file"></p>
+<p>上传dama.exe可以正常收到回弹信息</p>
+<h3 id="本人撰写的文章，仅供学习和研究使用，请勿使用文中的技术用于非法用途，任何人造成的任何负面影响，与本人无关。"><a href="#本人撰写的文章，仅供学习和研究使用，请勿使用文中的技术用于非法用途，任何人造成的任何负面影响，与本人无关。" class="headerlink" title="本人撰写的文章，仅供学习和研究使用，请勿使用文中的技术用于非法用途，任何人造成的任何负面影响，与本人无关。"></a>本人撰写的文章，仅供学习和研究使用，请勿使用文中的技术用于非法用途，任何人造成的任何负面影响，与本人无关。</h3>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95">渗透测试</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%86%85%E7%BD%91">内网</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%B8%97%E9%80%8F">渗透</a>
+                
+                  <a class="hover-with-bg" href="/tags/MSF">MSF</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2020/03/07/【靶机】记一次简单的内网渗透测试/';
+        this.page.identifier = '/2020/03/07/【靶机】记一次简单的内网渗透测试/';
+      };
+      var oldLoad = window.onload;
+      window.onload = function () {
+        var d = document, s = d.createElement('script');
+        s.type = 'text/javascript';
+        s.src = '//' + '13l00m# your shortname' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="nofollow noopener noopener">comments
+        powered by Disqus.</a></noscript>
+  </div>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">    
+Welcome to 13l00m'world
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  ');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "【靶机】记一次简单的内网渗透测试&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
