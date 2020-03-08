@@ -25,25 +25,25 @@
 <meta name="keywords" content="php,web安全,文件上传">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传漏洞类型总结">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;index.html">
 <meta property="og:site_name" content="13l00m&#39;World">
 <meta property="og:description" content="文件上传漏洞类型总结写在开始 文件上传不同类型有难易之分，简单类型简单处理  文件上传——前端绕过 前端代码  &amp;lt;script type=&quot;text&#x2F;javascript&quot;&amp;gt;    function checkFile() &amp;#123;        var file = document.getElementsByName(&amp;apos;upload_file&amp;apos;)[0].value;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;文件类型绕过&#x2F;1.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;文件类型绕过&#x2F;2.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;不同脚本文件类型解析&#x2F;1.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;00截断绕过&#x2F;1.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;00截断绕过&#x2F;2.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;二次渲染&#x2F;1.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;二次渲染&#x2F;2.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;二次渲染&#x2F;3.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;1.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;2.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;3.gif">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;4.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;文件类型绕过&#x2F;1.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;文件类型绕过&#x2F;2.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;不同脚本文件类型解析&#x2F;1.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;00截断绕过&#x2F;1.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;00截断绕过&#x2F;2.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;二次渲染&#x2F;1.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;二次渲染&#x2F;2.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;二次渲染&#x2F;3.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;1.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;2.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;3.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;条件竞争&#x2F;4.gif">
 <meta property="og:updated_time" content="2019-11-28T01:55:57.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;文件类型绕过&#x2F;1.gif">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;文件类型绕过&#x2F;1.gif">
     
         <link rel="alternate" type="application/atom+xml" title="13l00m&#39;World" href="/atom.xml">
     
@@ -61,7 +61,7 @@
 
     <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
-    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off" target="">
         <i class="icon icon-lg icon-close"></i>
     </a>
     <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
@@ -121,23 +121,23 @@
     <main id="main">
         <header class="top-header" id="header">
     <div class="flex-row">
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle" target="">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">文件上传漏洞类型总结</div>
         
         <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back" target="">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
             <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search" target="">
                 <i class="icon icon-lg icon-search"></i>
             </a>
         </div>
         
         
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare" target="">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
         
@@ -559,7 +559,7 @@
     </div>
     
     <footer>
-        <a href="http://yoursite.com">
+        <a href="https://13l00m.github.io">
             <img src="/img/avatar.jpg" alt="13l00m">
             13l00m
         </a>
@@ -568,7 +568,7 @@
 
         
 <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light" target="">赏</a>
 </div>
 
 
@@ -585,7 +585,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="" href="http://service.weibo.com/share/share.php?url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&pic=https://13l00m.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -595,22 +595,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&source=" data-title=" QQ">
+        <a class="qq share-sns" target="" href="http://connect.qq.com/widget/shareqq/index.html?url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《文件上传漏洞类型总结》 — 13l00m'World&url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《文件上传漏洞类型总结》 — 13l00m'World&url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&via=https://13l00m.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -619,7 +619,7 @@
 
 
 
-    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle" target="">
         <i class="icon icon-share-alt icon-lg"></i>
     </a>
 </div>
@@ -633,7 +633,7 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/" id="post-prev" class="post-nav-link">
+      <a href="/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/" id="post-prev" class="post-nav-link" target="">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">mysql注入漏洞方法及原理整理</h4>
       </a>
@@ -678,7 +678,7 @@
 </article>
 
 <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <a class="close" href="javascript:;" target=""><i class="icon icon-close"></i></a>
     <h3 class="reward-title">
         <i class="icon icon-quote-left"></i>
         谢谢~
@@ -731,7 +731,6 @@
         <p><span>13l00m &copy; 2015 - 2020</span>
             <span>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
             </span>
         </p>
     </div>
@@ -739,14 +738,14 @@
 
     </main>
     <div class="mask" id="mask"></div>
-<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light" target=""><span class="icon icon-lg icon-chevron-up" target=""></span></a>
 
 
 
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="" href="http://service.weibo.com/share/share.php?url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&pic=https://13l00m.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -756,22 +755,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&source=" data-title=" QQ">
+        <a class="qq share-sns" target="" href="http://connect.qq.com/widget/shareqq/index.html?url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&title=《文件上传漏洞类型总结》 — 13l00m'World&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《文件上传漏洞类型总结》 — 13l00m'World&url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《文件上传漏洞类型总结》 — 13l00m'World&url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/&via=https://13l00m.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -782,7 +781,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD60lEQVR42u3ay26jQBAFUP//TyfbkRLwvVVNkpEOK8vC0H2wVNTj9YqPj+D498yvv02+ubrm/Xruv3k9ceDAgQMHjsVW29u3QO3m8zven3l5Xxw4cODAcYjjahH3n/Pz86vNgugs6OLAgQMHjr/DkQfLJJXKQ+kmnOPAgQMHjv+Fo93YrDq32SoOHDhw4Ph5jjyMJc2hJGHb36sNw4drpThw4MCBI410r832/ubnR+Y7cODAgQPHaAAubxq1JcJNwMuDfbE7HDhw4MBxJlCs2kJJ6W0f/zcjcfmVceDAgQPHniMvyeUQ7W9nhbz2nAN5Kg4cOHDgOJQIJZT10EC83LNtqjd3wYEDBw4ca477RKgNwJsjfwm4X0nyGKKMFgcOHDhwjDj2yU8SJu8XmjeN9te/f/A4cODAgWPPsSkg5mlVsvRNITJvQT1YT8WBAwcOHBcDDW1wbb1n6VaSXrZh+83bBw4cOHDgGHGcKurlYbVNz9pEcVOCxIEDBw4ce45Zk6YNgW1xsN1M+9ii1wIcOHDgwDHi2CRsszLcplCYlyaHxUEcOHDgwPEYR974bxO52ed9UypqkuHAgQMHjkMcpxbdji/MRiKS14Ikbfvmyjhw4MCBY82RN4FmraN8G23q2A5SFK8ROHDgwIFjwdG2f06V+fLS3iwlm41N4MCBAweOPcepgl0++rAvCOYPpr0XDhw4cODYc5wKtG0alo9HbJLJOjXFgQMHDhxHOWbHvkHVIt4H49nKceDAgQPHExz5UFpeBGzHGmYNrTbNK2qlOHDgwIGj5MgDWxvk9uW8NslsC4v1fwQHDhw4cAQc+cZmZcHZoEP+ErB5hJf/Cxw4cODAseCoTw22nW8jb3ftA2oSpHHgwIEDx55j1uCZJX57xFOp2uXKceDAgQPHIY48Js/KebMt5XD7FhQOHDhw4HiaI0HZl/DapCtfVZvF4sCBAweOUxyboerN8EER/MryZfsYcODAgQPHWY7ZBvLgV3fA1qXGWfNp9Txx4MCBA8cXjnag4VSprqXZN6Le3B0HDhw4cBzi2A8uJ0ExD5yzYNymbThw4MCB4wmOTSOnLf/NErM85G8eDA4cOHDgOMXxUR6ztOp+k3lQbMmSxxAVB3HgwIEDR9cDqhOqdgStHV/I07nkV7PhDBw4cODAseHYhMx8Im+W8g2z0jLQ4sCBAweOJzjaQJXz5QH1/vp5U2rV1sKBAwcOHL/KMSvnbQLwLL0sSoE4cODAgeOXOPIlJmR5cygJw0nYvtwFDhw4cOA4xJEPMeRtnhlcXv5roaN94cCBAweONUdeStsneHmY3F9zM9KHAwcOHDhGHJ9la3N1qWIqbgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEhklEQVR42u3ay27iQBAF0Pn/n85Is4qUQO6tMhraOV4hAo37OFLX68+f+Pr4d31+/fl6/snZCu36j777dZ2v37rswoQJEyZMb8mUL/3o1tvtJRtuH9Wjv87W+ea7mDBhwoTpcKZ8ueef3AcT+8e2CSkevo8JEyZMmH4BU3IYt5ljEi7ss9FHDxsTJkyYMGHaBA3tUZ2EFO07s4IvJkyYMGG6H1N7rObNxXzbbUq8CR1eWAvHhAkTJkxvxjQb3LnH65fPN2HChAkTpv/K9FFebRLbJrftCM4sKKl3jQkTJkyYjmVKbnEWKLSpdcvX3sPs9C+eJCZMmDBhekum9uB//v6sZZhDzBqWmyLvD3ETJkyYMGE6hGk2LtPeYoKbJ89JwzUPFH4oB2PChAkTpsOZko0lB/M+3c3Di1nAMUybMWHChAnT4Uz5oskn27RzNjMzCx1mST4mTJgwYTqdKU8jZ8XTli+69VHYMdsFJkyYMGE6l6ktd26O9nbzbYiwX7MIjDBhwoQJ01FMm5GdPH1NgJLC6yzIaO/zm3cwYcKECdOBTPmis5ZhQt+O4ORBxlXlYEyYMGHCdDrTJqVsb2KWEu8p23+IbyImTJgwYcJ0I6ZZoTYvsyZN0CStbQORPNyJAgJMmDBhwnQgU5QKxkdsHhzMhn72DcvoM5gwYcKE6Vim9oevahDmK2+KvC+5MGHChAnTgUxJypof820QcMHkURwQzNqrmDBhwoTpdKZN0/F1A6P5I5mVfWfpMSZMmDBhOospKa3OmouzICP/Vo6SP7xh1xcTJkyYML0xU3IoztLdvBWab+yqkvQsNMGECRMmTKczXXVIb7bRlmI3TO3Dw4QJEyZMpzNtQod8q/vCa3sPbUEZEyZMmDDdiSlPXGcQ+2R7f2y3e3xYC8eECRMmTLdgygdM91e+vbZRehVWHVBhwoQJE6Y3Y9oEAbNm5Ga1JHR4xYPBhAkTJkynM+2bhXkw0Y66tmnzbNgoSu8xYcKECdNNmTal2+QAzr/1fDP5X2eNUkyYMGHCdC5T3lxsD/v2k+04bF66vSrowYQJEyZMZzElpdJ2fGez+VnJuA1E6gYnJkyYMGE6lqkdfJkRzG4rP8g3AcpsDAgTJkyYMJ3FlI/a5Olx22j8iK+2WLwPLzBhwoQJ07lMV0nPSqj5Y9inu7PG6hACEyZMmDC9JdOsfdiWgPNkOC/IXgDx/N4wYcKECdMtmPLtzY7bBKgtv7ajtMMgBhMmTJgw3YKpLblelVhuQoQ8qd48ZkyYMGHCdC7TVUu3hdfZIGkbdrS/hQkTJkyY7sf0UV7JBmYDN/uAo/3dghUTJkyYMB3L1J6J7eu8vDtrTM4e1WysFhMmTJgwncs0G9CZpcHtIX1ViTkPPjBhwoQJ012Z9kHAppE5K92271xQ/8aECRMmTLdmyrE24ziz7HzWQC32hQkTJkyYfiVTnpTmcPnvbgKR+lcwYcKECdPhTHmRdz8Q8/wY3ifPs1GhH0IWTJgwYcJ0LFNb4cy3usfK0+DN+E77W5gwYcKE6RCmv4bqYSL1nuzMAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
@@ -803,7 +802,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 </div>
 <template id="search-tpl">
 <li class="item">
-    <a href="{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect" target="">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">

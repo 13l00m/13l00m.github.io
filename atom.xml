@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://13l00m.github.io/"/>
   <updated>2020-03-07T13:23:53.102Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://13l00m.github.io/</id>
   
   <author>
     <name>13l00m</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>【靶机】记一次简单的内网渗透测试</title>
-    <link href="http://yoursite.com/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    <id>http://yoursite.com/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</id>
+    <link href="https://13l00m.github.io/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    <id>https://13l00m.github.io/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</id>
     <published>2020-03-07T12:53:02.000Z</published>
     <updated>2020-03-07T13:23:53.102Z</updated>
     
@@ -36,21 +36,21 @@
     </summary>
     
     
-      <category term="渗透测试" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+      <category term="渗透测试" scheme="https://13l00m.github.io/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="内网" scheme="http://yoursite.com/tags/%E5%86%85%E7%BD%91/"/>
+      <category term="内网" scheme="https://13l00m.github.io/tags/%E5%86%85%E7%BD%91/"/>
     
-      <category term="渗透" scheme="http://yoursite.com/tags/%E6%B8%97%E9%80%8F/"/>
+      <category term="渗透" scheme="https://13l00m.github.io/tags/%E6%B8%97%E9%80%8F/"/>
     
-      <category term="MSF" scheme="http://yoursite.com/tags/MSF/"/>
+      <category term="MSF" scheme="https://13l00m.github.io/tags/MSF/"/>
     
   </entry>
   
   <entry>
     <title>PHP恶意代码分析</title>
-    <link href="http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    <id>http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/</id>
+    <link href="https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/</id>
     <published>2019-11-28T01:58:50.000Z</published>
     <updated>2019-11-28T04:15:08.280Z</updated>
     
@@ -66,21 +66,21 @@
     </summary>
     
     
-      <category term="php代码审计" scheme="http://yoursite.com/categories/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+      <category term="php代码审计" scheme="https://13l00m.github.io/categories/php%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
     
-      <category term="php" scheme="http://yoursite.com/tags/php/"/>
+      <category term="php" scheme="https://13l00m.github.io/tags/php/"/>
     
-      <category term="代码审计" scheme="http://yoursite.com/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
+      <category term="代码审计" scheme="https://13l00m.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/"/>
     
-      <category term="web安全" scheme="http://yoursite.com/tags/web%E5%AE%89%E5%85%A8/"/>
+      <category term="web安全" scheme="https://13l00m.github.io/tags/web%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
   <entry>
     <title>mysql注入漏洞方法及原理整理</title>
-    <link href="http://yoursite.com/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/"/>
-    <id>http://yoursite.com/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/</id>
+    <link href="https://13l00m.github.io/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/"/>
+    <id>https://13l00m.github.io/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/</id>
     <published>2019-11-28T01:37:38.000Z</published>
     <updated>2019-11-29T07:19:29.876Z</updated>
     
@@ -96,19 +96,19 @@
     </summary>
     
     
-      <category term="数据库安全" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8/"/>
+      <category term="数据库安全" scheme="https://13l00m.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="sql注入" scheme="http://yoursite.com/tags/sql%E6%B3%A8%E5%85%A5/"/>
+      <category term="sql注入" scheme="https://13l00m.github.io/tags/sql%E6%B3%A8%E5%85%A5/"/>
     
-      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+      <category term="mysql" scheme="https://13l00m.github.io/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>文件上传漏洞类型总结</title>
-    <link href="http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/</id>
+    <link href="https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/"/>
+    <id>https://13l00m.github.io/2019/11/28/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93/</id>
     <published>2019-11-28T01:37:38.000Z</published>
     <updated>2019-11-28T01:55:57.792Z</updated>
     
@@ -124,14 +124,14 @@
     </summary>
     
     
-      <category term="各类漏洞收集整理" scheme="http://yoursite.com/categories/%E5%90%84%E7%B1%BB%E6%BC%8F%E6%B4%9E%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/"/>
+      <category term="各类漏洞收集整理" scheme="https://13l00m.github.io/categories/%E5%90%84%E7%B1%BB%E6%BC%8F%E6%B4%9E%E6%94%B6%E9%9B%86%E6%95%B4%E7%90%86/"/>
     
     
-      <category term="php" scheme="http://yoursite.com/tags/php/"/>
+      <category term="php" scheme="https://13l00m.github.io/tags/php/"/>
     
-      <category term="web安全" scheme="http://yoursite.com/tags/web%E5%AE%89%E5%85%A8/"/>
+      <category term="web安全" scheme="https://13l00m.github.io/tags/web%E5%AE%89%E5%85%A8/"/>
     
-      <category term="文件上传" scheme="http://yoursite.com/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+      <category term="文件上传" scheme="https://13l00m.github.io/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
     
   </entry>
   

